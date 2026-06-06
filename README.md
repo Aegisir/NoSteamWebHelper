@@ -1,5 +1,6 @@
-> [!CAUTION]
-> This project is now deprecated.
+> [!NOTE]
+> This repository is a fork branch.
+> The original [upstream project](https://github.com/Aetopia/NoSteamWebHelper.git) is deprecated.
 
 # NoSteamWebHelper
  A program that disables Steam's CEF/Chromium Embedded Framework.
@@ -8,7 +9,7 @@
 This program was created with the intent of replacing of Steam's command-line parameter `-no-browser` which was [removed.](https://steamcommunity.com/groups/SteamClientBeta/discussions/3/3710433479207750727/?ctp=42)
 
 
-## How does NoSteamWebHelper kill or disable the CEF/Chromium Embedded Framework? 
+## How does NoSteamWebHelper kill or disable the CEF/Chromium Embedded Framework?
 
 The dynamic link library toggles the CEF depending if an is app running or not.
 
@@ -17,7 +18,7 @@ The dynamic link library toggles the CEF depending if an is app running or not.
 - If an app is not running then the CEF is enabled.
 
 This way, Steam is still accessible to use.
-    
+
 # Usage
 1. Download the latest release from [GitHub Releases](https://github.com/Aetopia/NoSteamWebHelper/releases).
 
@@ -28,7 +29,9 @@ This way, Steam is still accessible to use.
 4. Start up an app and the CEF will be toggled accordingly.
 
 > [!NOTE]
-> - You may also manually toggle the CEF via a tray icon.
+> - You may manually toggle the CEF from the tray icon or the native status window.
+> - Right-click the tray icon to show the window, enable CEF, or disable CEF.
+> - Double-click the tray icon to open the status window.
 > - To prevent the CEF from automatically showing when restored, pass `-silent` to Steam.
 
 ## Build
@@ -38,7 +41,7 @@ This way, Steam is still accessible to use.
     pacman -Syu --noconfirm
     ```
 
-3. Install [GCC](https://gcc.gnu.org) & [MinHook](https://github.com/TsudaKageyu/minhook):
+3. Install [GCC](https://gcc.gnu.org):
 
     ```bash
     pacman -Syu mingw-w64-ucrt-x86_64-gcc --noconfirm
@@ -46,6 +49,3 @@ This way, Steam is still accessible to use.
 
 
 3. Start MSYS2's `UCRT64` environment & run `Build.cmd`.
-
-
-
