@@ -20,6 +20,18 @@ The dynamic link library toggles the CEF depending if an is app running or not.
 This way, Steam is still accessible to use.
 
 # Usage
+## Installer
+1. Build the installer with `BuildInstaller.cmd`.
+
+2. Make sure Steam is fully closed.
+
+3. Run `installer\bin\NoSteamWebHelperSetup.exe`.
+
+4. The installer detects the Steam directory, backs up an existing `umpdc.dll` to `umpdc.dll.bak`, and installs the new DLL.
+
+5. Use the generated uninstaller to remove `umpdc.dll` and restore the backup when available.
+
+## Manual install
 1. Download the latest release from [GitHub Releases](https://github.com/Aetopia/NoSteamWebHelper/releases).
 
 2. Place `umpdc.dll` in your Steam installation directory where `steam.exe` is located.
@@ -29,9 +41,8 @@ This way, Steam is still accessible to use.
 4. Start up an app and the CEF will be toggled accordingly.
 
 > [!NOTE]
-> - You may manually toggle the CEF from the tray icon or the native status window.
-> - Right-click the tray icon to show the window, enable CEF, or disable CEF.
-> - Double-click the tray icon to open the status window.
+> - You may manually toggle the CEF from the tray icon.
+> - Right-click the tray icon to enable or disable CEF.
 > - To prevent the CEF from automatically showing when restored, pass `-silent` to Steam.
 
 ## Build
@@ -49,3 +60,5 @@ This way, Steam is still accessible to use.
 
 
 3. Start MSYS2's `UCRT64` environment & run `Build.cmd`.
+
+4. To build the optional installer, install [Inno Setup](https://jrsoftware.org/isinfo.php) and run `BuildInstaller.cmd`.
