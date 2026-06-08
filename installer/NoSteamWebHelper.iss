@@ -25,6 +25,7 @@ Source: "..\src\bin\umpdc.dll"; DestDir: "{app}"; DestName: "umpdc.dll"; Flags: 
 [Code]
 const
   SteamKey = 'Software\Valve\Steam';
+  UninstallKey = 'Software\Microsoft\Windows\CurrentVersion\Uninstall\{B950978D-64D1-42F8-9A99-4BB760D0979B}_is1';
   DllName = 'umpdc.dll';
   BackupName = 'umpdc.dll.bak';
 
@@ -83,6 +84,36 @@ begin
     Result := Dir
   else
     Result := ExpandConstant('{commonpf32}\Steam');
+end;
+
+function ReadUninstallString(var UninstallString: String): Boolean;
+begin
+  Result := RegQueryStringValue(HKLM32, UninstallKey, 'UninstallString', UninstallString);
+
+  if not Result and IsWin64 then
+    Result := RegQueryStringValue(HKLM64, UninstallKey, 'UninstallString', UninstallString);
+
+  if not Result then
+    Result := RegQueryStringValue(HKCU, UninstallKey, 'UninstallString', UninstallString);
+end;
+
+function InitializeSetup: Boolean;
+var
+  ResultCode: Integer;
+  UninstallString: String;
+begin
+  Result := True;
+
+  if ReadUninstallString(UninstallString) then
+  begin
+    if MsgBox('NoSteamWebHelper is already installed. Do you want to uninstall it now?', mbConfirmation, MB_YESNO) = IDYES then
+    begin
+      if not Exec(RemoveQuotes(UninstallString), '', '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
+        MsgBox('Failed to start the uninstaller.', mbError, MB_OK);
+
+      Result := False;
+    end;
+  end;
 end;
 
 function NextButtonClick(CurPageID: Integer): Boolean;

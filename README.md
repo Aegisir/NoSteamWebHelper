@@ -31,6 +31,8 @@ This way, Steam is still accessible to use.
 
 5. Use the generated uninstaller to remove `umpdc.dll` and restore the backup when available.
 
+6. Run the setup again to choose whether to uninstall the existing installation.
+
 ## Manual install
 1. Download the latest release from [GitHub Releases](https://github.com/Aetopia/NoSteamWebHelper/releases).
 
